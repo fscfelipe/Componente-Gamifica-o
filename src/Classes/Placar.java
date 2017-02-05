@@ -11,7 +11,7 @@ public class Placar {
 	public Placar(Armazenamento arm) {
 		this.armazenamento = arm;
 	}
-
+	
 	public void registrarPonto(String usuario, String tipo, int valor) {
 		armazenamento.registrarPonto(usuario, tipo, valor);
 	}

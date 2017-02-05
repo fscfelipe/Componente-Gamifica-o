@@ -1,19 +1,22 @@
 package Classes;
 
-public class MockArmazenamento extends Armazenamento {
+import java.util.HashMap;
+import java.util.Map;
 
-	String usuario;
-	String tipoPonto;
-	int valorPonto;
+public class MockArmazenamento extends Armazenamento {
+	
+	Map<String, Map<String, Integer>> lista = new HashMap<>();
 	
 	public void registrarPonto(String usuario, String tipo, int valor) {
-		this.usuario = usuario;
-		this.tipoPonto = tipo;
-		this.valorPonto = valor;
+		for(Map mapa: lista){
+			if(mapa.get(usuario) == usuario){
+				lista.put(key, value)
+			}
+		}
 	}
 	
 	public String retornarPontos(String usuario){
-		return this.usuario + " possui " + Integer.toString(valorPonto)
-					+ " pontos do tipo "+ tipoPonto;
+		return usuario;
+		
 	}
 }
