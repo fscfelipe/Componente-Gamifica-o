@@ -6,7 +6,7 @@ public class Armazenamento {
 		
 	}
 
-	public String retornarPontos(String usuario) {
+	public String retornarPonto(String usuario) {
 		return usuario;
 		
 	}

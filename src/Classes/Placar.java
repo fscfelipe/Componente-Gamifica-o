@@ -16,8 +16,8 @@ public class Placar {
 		armazenamento.registrarPonto(usuario, tipo, valor);
 	}
 
-	public String retornarPontos(String usuario) {
-		return armazenamento.retornarPontos(usuario);
+	public String retornarPonto(String usuario) {
+		return armazenamento.retornarPonto(usuario);
 	}
 
 	public String retornarRankPonto(String string) {
