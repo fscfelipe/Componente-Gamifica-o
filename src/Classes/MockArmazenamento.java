@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class MockArmazenamento extends Armazenamento {
 
@@ -33,9 +34,11 @@ public class MockArmazenamento extends Armazenamento {
 
 			for (Map.Entry<String, Integer> inner : outer.entrySet()) {
 				if (lista.get(usuario).size() == count) {
-					output = output + Integer.toString(inner.getValue()) + " pontos do tipo " + inner.getKey();
+					output = output + Integer.toString(inner.getValue()) 
+					+ " pontos do tipo " + inner.getKey();
 				} else {
-					output = output + Integer.toString(inner.getValue()) + " pontos do tipo " + inner.getKey() + " e ";
+					output = output + Integer.toString(inner.getValue()) 
+					+ " pontos do tipo " + inner.getKey() + " e ";
 					count++;
 				}
 			}
@@ -45,6 +48,28 @@ public class MockArmazenamento extends Armazenamento {
 		} else {
 			return "Usuário inexistente!";
 		}
+	}
+	
+	public String retornarRank(String tipoPonto){
+		String output = "";
+		int count = 0;
+		
+		for(Entry<String, HashMap<String, Integer>> outerMap: lista.entrySet()){
+			for(Entry<String, Integer> innerMap: outerMap.getValue().entrySet()){
+				if(tipoPonto.equals(innerMap.getKey())){
+					count++;
+					if(count > 1){
+						output = output+", " + outerMap.getKey()+" com " + innerMap.getValue();
+					}else{
+						output = output+ outerMap.getKey()+ " com " + innerMap.getValue();
+					}
+				}
+				
+			}
+			
+		}
+		
+		return output;
 	}
 
 }

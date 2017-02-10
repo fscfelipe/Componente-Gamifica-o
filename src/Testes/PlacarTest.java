@@ -39,6 +39,11 @@ public class PlacarTest {
 	
 	@Test
 	public void testRegistrar1Ponto2Usuarios(){
+		placar.registrarPonto("Felipe", "estrela", 67);
+		placar.registrarPonto("Jonas", "estrela", 89);
+		
+		assertEquals("Felipe possui 67 pontos do tipo estrela", placar.retornarPonto("Felipe"));
+		assertEquals("Jonas possui 89 pontos do tipo estrela", placar.retornarPonto("Jonas"));
 	}
 	
 	@Test
@@ -49,10 +54,17 @@ public class PlacarTest {
 		
 		assertEquals("Jonas possui 67 pontos do tipo moeda e 55 pontos do tipo estrela"
 				, placar.retornarPonto("Jonas"));
+		assertEquals("Felipe possui 44 pontos do tipo estrela", placar.retornarPonto("Felipe"));
 	}
 	
 	@Test
 	public void testRetornarRank(){
+		placar.registrarPonto("Felipe", "estrela", 44);
+		placar.registrarPonto("Jonas", "moeda", 67);
+		placar.registrarPonto("Jonas", "estrela", 55);
+		
+		assertEquals("Felipe com 44, Jonas com 55", placar.retornarRankPonto("estrela"));
+		
 	}
 
 }

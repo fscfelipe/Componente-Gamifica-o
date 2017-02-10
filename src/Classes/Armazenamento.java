@@ -10,5 +10,10 @@ public class Armazenamento {
 		return usuario;
 		
 	}
+	
+	public String retornarRank(String tipoPonto){
+		return tipoPonto;
+		
+	}
 
 }

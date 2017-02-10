@@ -21,7 +21,7 @@ public class Placar {
 	}
 
 	public String retornarRankPonto(String string) {
-		return null;
+		return armazenamento.retornarRank(string);
 	}
 
 	public void setArmazenamento(Armazenamento arm){
