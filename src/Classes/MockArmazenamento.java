@@ -5,6 +5,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class MockArmazenamento extends Armazenamento {
+	
+	/*
+	 * Este mock usa um sistema de Map para simular o armazenamento 
+	 * e testar o funcionamento da classe placar. 
+	 * 
+	 */
 
 	Map<String, HashMap<String, Integer>> lista = new HashMap<String, HashMap<String, Integer>>();
 
