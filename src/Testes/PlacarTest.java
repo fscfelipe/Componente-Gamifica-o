@@ -2,6 +2,8 @@ package Testes;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ public class PlacarTest {
 	
 
 	@Before
-	public void setUP(){
+	public void setUP() throws IOException{
 		mock = new MockArmazenamento();
 		placar = new Placar(mock);
 		

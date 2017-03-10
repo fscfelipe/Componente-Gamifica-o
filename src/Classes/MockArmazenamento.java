@@ -1,5 +1,6 @@
 package Classes;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,6 +12,10 @@ public class MockArmazenamento extends Armazenamento {
 	 * e testar o funcionamento da classe placar. 
 	 * 
 	 */
+
+	public MockArmazenamento() throws IOException {
+		super();
+	}
 
 	Map<String, HashMap<String, Integer>> lista = new HashMap<String, HashMap<String, Integer>>();
 
