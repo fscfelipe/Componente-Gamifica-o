@@ -1,10 +1,13 @@
 package Classes;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 public class Armazenamento {
 
@@ -25,25 +28,107 @@ public class Armazenamento {
 
 	public void registrarPonto(String usuario, String tipo, int valor) {
 
-		try (FileWriter fw = new FileWriter(fileName+".txt", true);
+		try (FileWriter fw = new FileWriter(fileName + ".txt", true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter out = new PrintWriter(bw)) {
 			out.print(usuario);
-			out.print(" "+tipo);
-			out.println(" "+Integer.toString(valor));
+			out.print(" " + tipo);
+			out.println(" " + Integer.toString(valor));
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 
 	}
 
 	public String retornarPonto(String usuario) {
-		return usuario;
 
+		HashMap<String, Integer> mapa = new HashMap<>();
+		String saida = usuario + " possui ";
+
+		try {
+			BufferedReader buffer = new BufferedReader(new FileReader(file));
+			String readLine = "";
+			while ((readLine = buffer.readLine()) != null) {
+				String[] splitter = readLine.split(" ");
+				if (splitter[0].equals(usuario)) {
+					// saida = saida + splitter[2] + " pontos do tipo " +
+					// splitter[1] + " e ";
+					if (mapa.containsKey(splitter[1]))
+						mapa.put(splitter[1], mapa.get(splitter[1]) + Integer.parseInt(splitter[2]));
+					else
+						mapa.put(splitter[1], Integer.parseInt(splitter[2]));
+
+				}
+			}
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+		for (String key : mapa.keySet()) {
+			saida = saida + Integer.toString(mapa.get(key)) + " pontos do tipo " + key + " e ";
+		}
+
+		saida = saida.substring(0, saida.length() - 3);
+
+		return saida;
+
+	}
+
+	public String retornarPontoPorTipo(String usuario, String tipo) {
+		String saida = "";
+		int total = 0;
+
+		try {
+			BufferedReader buffer = new BufferedReader(new FileReader(file));
+			String readLine = "";
+			while ((readLine = buffer.readLine()) != null) {
+				String[] splitter = readLine.split(" ");
+				if (splitter[0].equals(usuario) && splitter[1].equals(tipo)) {
+					total = total + Integer.parseInt(splitter[2]);
+				}
+				if (total > 0)
+					saida = usuario + " possui " + Integer.toString(total) + " pontos do tipo " + tipo;
+				else
+					saida = usuario + " possui 0 pontos do tipo " + tipo;
+			}
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return saida;
+	}
+
+	public String retornarUsuarios() {
+
+		String saida = "";
+
+		try {
+			BufferedReader buffer = new BufferedReader(new FileReader(file));
+			String readLine = "";
+			while ((readLine = buffer.readLine()) != null) {
+				String[] splitter = readLine.split(" ");
+				if (!saida.contains(splitter[0]))
+					saida = saida + splitter[0] + ", ";
+			}
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+		saida = saida.substring(0, saida.length() - 2);
+
+		return saida;
 	}
 
 	public String retornarRank(String tipoPonto) {
 		return tipoPonto;
 
+	}
+
+	public void deletarArquivo() {
+		file.delete();
 	}
 
 }

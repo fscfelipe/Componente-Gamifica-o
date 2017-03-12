@@ -23,10 +23,19 @@ public class Placar {
 	public String retornarRankPonto(String string) {
 		return armazenamento.retornarRank(string);
 	}
+	
+	public String retornarPontoPorTipo(String usuario, String tipo){
+		return armazenamento.retornarPontoPorTipo(usuario, tipo);
+	}
+	
+	public String retornarUsuarios(){
+		return this.armazenamento.retornarUsuarios();
+	}
 
 	public void setArmazenamento(Armazenamento arm){
-		this.armazenamento = arm;
-		
+		this.armazenamento = arm;	
 	}
+	
+	
 
 }
