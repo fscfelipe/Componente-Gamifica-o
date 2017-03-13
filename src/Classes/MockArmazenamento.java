@@ -4,17 +4,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 public class MockArmazenamento extends Armazenamento {
-	
 
 	public MockArmazenamento() throws IOException {
 		super();
 	}
 
 	Map<String, HashMap<String, Integer>> lista = new HashMap<String, HashMap<String, Integer>>();
-
+	
 	public void registrarPonto(String usuario, String tipo, int valor) {
 
 		if (lista.containsKey(usuario)) {
@@ -56,23 +54,23 @@ public class MockArmazenamento extends Armazenamento {
 			return "Usuário inexistente!";
 		}
 	}
-	
-	public HashMap<String, Integer> retornarRank(String tipoPonto){
-		String output = "";
-		int count = 0;
-		HashMap<String, Integer> mapa = new HashMap<>();
+
+	public HashMap<String, Integer> retornarRank(String tipoPonto) {
 		
-		for(Entry<String, HashMap<String, Integer>> outerMap: lista.entrySet()){
-			for(Entry<String, Integer> innerMap: outerMap.getValue().entrySet()){
-				if(tipoPonto.equals(innerMap.getKey())){
+		HashMap<String, Integer> mapa = new HashMap<>();
+
+		for (Entry<String, HashMap<String, Integer>> outerMap : lista.entrySet()) {
+			for (Entry<String, Integer> innerMap : outerMap.getValue().entrySet()) {
+				if (tipoPonto.equals(innerMap.getKey())) {
 					if (mapa.containsKey(outerMap.getKey()))
-						mapa.put(outerMap.getKey(), mapa.get(outerMap.getKey()) + innerMap.getValue());
+						mapa.put(outerMap.getKey(), mapa.get(outerMap.getKey()) 
+								+ innerMap.getValue());
 					else
 						mapa.put(outerMap.getKey(), innerMap.getValue());
 				}
-				
+
 			}
-			
+
 		}
 		return mapa;
 	}

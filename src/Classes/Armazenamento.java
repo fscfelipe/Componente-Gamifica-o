@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class Armazenamento {
-
 
 	String fileName;
 	File file;
@@ -52,19 +50,23 @@ public class Armazenamento {
 				String[] splitter = readLine.split(" ");
 				if (splitter[0].equals(usuario)) {
 					if (mapa.containsKey(splitter[1]))
-						mapa.put(splitter[1], mapa.get(splitter[1]) + Integer.parseInt(splitter[2]));
+						mapa.put(splitter[1], mapa.get(splitter[1]) 
+								+ Integer.parseInt(splitter[2]));
 					else
 						mapa.put(splitter[1], Integer.parseInt(splitter[2]));
 
 				}
 			}
+			
+			buffer.close();
 
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 
 		for (String key : mapa.keySet()) {
-			saida = saida + Integer.toString(mapa.get(key)) + " pontos do tipo " + key + " e ";
+			saida = saida + Integer.toString(mapa.get(key)) 
+					+ " pontos do tipo " + key + " e ";
 		}
 
 		saida = saida.substring(0, saida.length() - 3);
@@ -86,10 +88,12 @@ public class Armazenamento {
 					total = total + Integer.parseInt(splitter[2]);
 				}
 				if (total > 0)
-					saida = usuario + " possui " + Integer.toString(total) + " pontos do tipo " + tipo;
+					saida = usuario + " possui " 
+							+ Integer.toString(total) + " pontos do tipo " + tipo;
 				else
 					saida = usuario + " possui 0 pontos do tipo " + tipo;
 			}
+			buffer.close();
 
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -110,6 +114,7 @@ public class Armazenamento {
 				if (!saida.contains(splitter[0]))
 					saida = saida + splitter[0] + ", ";
 			}
+			buffer.close();
 
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -120,17 +125,15 @@ public class Armazenamento {
 		return saida;
 	}
 
-	public HashMap<String, Integer> retornarRank(String tipoPonto){
-		String output = "";
-		int count = 0;
+	public HashMap<String, Integer> retornarRank(String tipoPonto) {
 		HashMap<String, Integer> mapa = new HashMap<>();
 		mapa = (HashMap<String, Integer>) retornaMapaRank(tipoPonto);
-		
+
 		return mapa;
 	}
-	
-	private Map retornaMapaRank(String tipoPonto){
-		
+
+	private Map<String, Integer> retornaMapaRank(String tipoPonto) {
+
 		HashMap<String, Integer> mapa = new HashMap<>();
 
 		try {
@@ -140,20 +143,21 @@ public class Armazenamento {
 				String[] splitter = readLine.split(" ");
 				if (splitter[1].equals(tipoPonto)) {
 					if (mapa.containsKey(splitter[0]))
-						mapa.put(splitter[0], mapa.get(splitter[0]) + Integer.parseInt(splitter[2]));
+						mapa.put(splitter[0], mapa.get(splitter[0]) 
+								+ Integer.parseInt(splitter[2]));
 					else
 						mapa.put(splitter[0], Integer.parseInt(splitter[2]));
 
 				}
 			}
+			buffer.close();
 
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 
 		return mapa;
-		
-	}
 
+	}
 
 }

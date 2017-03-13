@@ -1,18 +1,13 @@
 package Classes;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeMap;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Placar {
 
@@ -50,7 +45,7 @@ public class Placar {
 		}
 
 		saida = saida.substring(0, saida.length() - 2);
-		
+
 		return saida;
 	}
 
@@ -66,7 +61,7 @@ public class Placar {
 		this.armazenamento = arm;
 	}
 
-	private List sort(Map mapa) {
+	private List sort(Map<String, Integer> mapa) {
 		Set<Entry<String, Integer>> set = mapa.entrySet();
 		List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
 		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
