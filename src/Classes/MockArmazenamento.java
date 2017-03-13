@@ -69,12 +69,6 @@ public class MockArmazenamento extends Armazenamento {
 						mapa.put(outerMap.getKey(), mapa.get(outerMap.getKey()) + innerMap.getValue());
 					else
 						mapa.put(outerMap.getKey(), innerMap.getValue());
-					/*count++;
-					if(count > 1){
-						output = output+", " + outerMap.getKey()+" com " + innerMap.getValue();
-					}else{
-						output = output+ outerMap.getKey()+ " com " + innerMap.getValue();
-					}*/
 				}
 				
 			}

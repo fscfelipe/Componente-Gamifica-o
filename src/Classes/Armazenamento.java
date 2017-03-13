@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Armazenamento {
 
@@ -119,13 +120,40 @@ public class Armazenamento {
 		return saida;
 	}
 
-	public HashMap<String, Integer> retornarRank(String tipoPonto) {
-		return null;
+	public HashMap<String, Integer> retornarRank(String tipoPonto){
+		String output = "";
+		int count = 0;
+		HashMap<String, Integer> mapa = new HashMap<>();
+		mapa = (HashMap<String, Integer>) retornaMapaRank(tipoPonto);
+		
+		return mapa;
+	}
+	
+	private Map retornaMapaRank(String tipoPonto){
+		
+		HashMap<String, Integer> mapa = new HashMap<>();
 
+		try {
+			BufferedReader buffer = new BufferedReader(new FileReader(file));
+			String readLine = "";
+			while ((readLine = buffer.readLine()) != null) {
+				String[] splitter = readLine.split(" ");
+				if (splitter[1].equals(tipoPonto)) {
+					if (mapa.containsKey(splitter[0]))
+						mapa.put(splitter[0], mapa.get(splitter[0]) + Integer.parseInt(splitter[2]));
+					else
+						mapa.put(splitter[0], Integer.parseInt(splitter[2]));
+
+				}
+			}
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return mapa;
+		
 	}
 
-	public void deletarArquivo() {
-		file.delete();
-	}
 
 }

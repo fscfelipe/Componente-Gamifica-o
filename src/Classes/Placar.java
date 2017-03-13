@@ -19,7 +19,6 @@ public class Placar {
 	Armazenamento armazenamento;
 
 	public Placar() {
-		// Construtor sem argumentos
 	}
 
 	public Placar(Armazenamento arm) {

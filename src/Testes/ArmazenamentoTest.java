@@ -2,6 +2,7 @@ package Testes;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.After;
@@ -29,7 +30,8 @@ public class ArmazenamentoTest {
 	
 	@After
 	public void reset(){
-		arm.deletarArquivo();
+		File file = new File("Placar.txt");
+		file.delete();
 	}
 	
 	@Test
@@ -100,6 +102,21 @@ public class ArmazenamentoTest {
 		placar.registrarPonto("Jonas", "estrela", 55);
 		
 		assertEquals("Felipe, Jonas, Carlos, Rejane", placar.retornarUsuarios());
+	}
+	
+	@Test
+	public void testRetornarRank(){
+		placar.registrarPonto("Felipe", "estrela", 44);
+		placar.registrarPonto("Jonas", "moeda", 67);
+		placar.registrarPonto("Jonas", "estrela", 55);
+		placar.registrarPonto("Felipe", "estrela", 55);
+		placar.registrarPonto("Carlos", "estrela", 55);
+		placar.registrarPonto("Rejane", "estrela", 55);
+		placar.registrarPonto("Jonas", "estrela", 55);
+			
+		
+		assertEquals("Jonas com 110, Felipe com 99, Carlos com 55, Rejane com 55"
+					, placar.retornarRankPonto("estrela"));
 	}
 
 }
