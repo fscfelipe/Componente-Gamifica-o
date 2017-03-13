@@ -4,14 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class MockArmazenamento extends Armazenamento {
 	
-	/*
-	 * Este mock usa um sistema de Map para simular o armazenamento 
-	 * e testar o funcionamento da classe placar. 
-	 * 
-	 */
 
 	public MockArmazenamento() throws IOException {
 		super();
@@ -61,26 +57,30 @@ public class MockArmazenamento extends Armazenamento {
 		}
 	}
 	
-	public String retornarRank(String tipoPonto){
+	public HashMap<String, Integer> retornarRank(String tipoPonto){
 		String output = "";
 		int count = 0;
+		HashMap<String, Integer> mapa = new HashMap<>();
 		
 		for(Entry<String, HashMap<String, Integer>> outerMap: lista.entrySet()){
 			for(Entry<String, Integer> innerMap: outerMap.getValue().entrySet()){
 				if(tipoPonto.equals(innerMap.getKey())){
-					count++;
+					if (mapa.containsKey(outerMap.getKey()))
+						mapa.put(outerMap.getKey(), mapa.get(outerMap.getKey()) + innerMap.getValue());
+					else
+						mapa.put(outerMap.getKey(), innerMap.getValue());
+					/*count++;
 					if(count > 1){
 						output = output+", " + outerMap.getKey()+" com " + innerMap.getValue();
 					}else{
 						output = output+ outerMap.getKey()+ " com " + innerMap.getValue();
-					}
+					}*/
 				}
 				
 			}
 			
 		}
-		
-		return output;
+		return mapa;
 	}
 
 }

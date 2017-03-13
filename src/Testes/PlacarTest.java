@@ -65,7 +65,7 @@ public class PlacarTest {
 		placar.registrarPonto("Jonas", "moeda", 67);
 		placar.registrarPonto("Jonas", "estrela", 55);
 		
-		assertEquals("Felipe com 44, Jonas com 55", placar.retornarRankPonto("estrela"));
+		assertEquals("Jonas com 55, Felipe com 44", placar.retornarRankPonto("estrela"));
 		
 	}
 

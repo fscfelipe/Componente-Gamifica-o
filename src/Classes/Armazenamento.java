@@ -8,11 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Armazenamento {
 
-	// site para suporte:
-	// https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
 
 	String fileName;
 	File file;
@@ -51,8 +50,6 @@ public class Armazenamento {
 			while ((readLine = buffer.readLine()) != null) {
 				String[] splitter = readLine.split(" ");
 				if (splitter[0].equals(usuario)) {
-					// saida = saida + splitter[2] + " pontos do tipo " +
-					// splitter[1] + " e ";
 					if (mapa.containsKey(splitter[1]))
 						mapa.put(splitter[1], mapa.get(splitter[1]) + Integer.parseInt(splitter[2]));
 					else
@@ -122,8 +119,8 @@ public class Armazenamento {
 		return saida;
 	}
 
-	public String retornarRank(String tipoPonto) {
-		return tipoPonto;
+	public HashMap<String, Integer> retornarRank(String tipoPonto) {
+		return null;
 
 	}
 

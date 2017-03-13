@@ -1,17 +1,31 @@
 package Classes;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 public class Placar {
 
 	Armazenamento armazenamento;
 
 	public Placar() {
-		//Construtor sem argumentos
+		// Construtor sem argumentos
 	}
 
 	public Placar(Armazenamento arm) {
-		this.armazenamento = arm;
+		setArmazenamento(arm);
 	}
-	
+
 	public void registrarPonto(String usuario, String tipo, int valor) {
 		armazenamento.registrarPonto(usuario, tipo, valor);
 	}
@@ -21,21 +35,53 @@ public class Placar {
 	}
 
 	public String retornarRankPonto(String string) {
-		return armazenamento.retornarRank(string);
+		Map<String, Integer> mapa = new HashMap<>();
+		mapa = armazenamento.retornarRank(string);
+
+		Set<Entry<String, Integer>> set = mapa.entrySet();
+		List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
+
+		list = sort(mapa);
+
+		String saida = "";
+		for (int i = 0; i < list.size(); i++) {
+			saida = saida + list.get(i).getKey() + " com " 
+					+ Integer.toString(list.get(i).getValue().intValue()) + ", ";
+
+		}
+
+		saida = saida.substring(0, saida.length() - 2);
+		
+		return saida;
 	}
-	
-	public String retornarPontoPorTipo(String usuario, String tipo){
+
+	public String retornarPontoPorTipo(String usuario, String tipo) {
 		return armazenamento.retornarPontoPorTipo(usuario, tipo);
 	}
-	
-	public String retornarUsuarios(){
+
+	public String retornarUsuarios() {
 		return this.armazenamento.retornarUsuarios();
 	}
 
-	public void setArmazenamento(Armazenamento arm){
-		this.armazenamento = arm;	
+	private void setArmazenamento(Armazenamento arm) {
+		this.armazenamento = arm;
 	}
-	
-	
+
+	private List sort(Map mapa) {
+		Set<Entry<String, Integer>> set = mapa.entrySet();
+		List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
+		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+				int result = (o2.getValue()).compareTo(o1.getValue());
+				if (result != 0) {
+					return result;
+				} else {
+					return o1.getKey().compareTo(o2.getKey());
+				}
+			}
+		});
+
+		return list;
+	}
 
 }
